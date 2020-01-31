@@ -13,12 +13,15 @@
                 </a>
             </li>
             <li class="pure-menu-item menu-item-divided">
-                <a class="pure-menu-link" href="/shutdown">
-                    <div class="clr-error">
-                        <i class="fa fa-stop-circle"></i>
-                        Shutdown
-                    </div>
-                </a>
+                <form action="/shutdown" method="POST">
+
+                    <button class="pure-menu-link shutdown-btn" type="submit">
+                        <div class="clr-error" style="text-align: left;">
+                            <i class="fa fa-stop-circle"></i> Shutdown
+                        </div>
+                    </button>
+                    
+                </form>
             </li>
         </ul>
     </div>

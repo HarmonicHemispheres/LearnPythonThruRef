@@ -4,14 +4,15 @@ from flask import (
     redirect, 
     url_for, 
     make_response,
-    request
+    request,
+    jsonify
 )
 import requests
 import os
 import sys
 import psutil
 from pathlib import Path
-import subprocess
+from multiprocessing import Process
 import webbrowser
 from .config import (
     Config, 
@@ -32,12 +33,20 @@ def getconfig(settings):
         return TestingConfig
 
 
+def shutdown_server():
+    """ utility for shutting down the builtin flask server """
+
+    func = request.environ.get('werkzeug.server.shutdown')
+    if func is None:
+        raise RuntimeError('Not running with the Werkzeug Server')
+    func()
+
+
 def create_app(settings='default'):
 
     app = Flask(__name__)
     settings_obj = getconfig(settings)
     app.config.from_object(settings_obj)
-
 
     ################################################
     ####              --ROUTES--                ####
@@ -52,21 +61,13 @@ def create_app(settings='default'):
         return render_template("pages/about.html")
 
 
-    @app.route('/shutdown')
+    @app.route('/shutdown', methods=["POST"])
     def shutdown():
-
-        pid = os.fork()
-        if pid == 0:
-            return render_template('pages/shutdown.html')
-        else:
-            subprocess.run(['kill', f'{os.getpid()}'])
-
+        shutdown_server()
+        return render_template("pages/shutdown.html")
 
     ################################################
     ####            --LAUNCH APP--              ####
     ################################################
-    app_pid = os.fork()
-    if app_pid == 0:
-        app.run()
-    else:
-        webbrowser.open(settings_obj.SERVER_NAME)
+    webbrowser.open(settings_obj.SERVER_NAME)
+    app.run()

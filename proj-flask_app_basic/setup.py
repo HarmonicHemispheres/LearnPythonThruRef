@@ -25,8 +25,9 @@ setup(
     install_requires=[
         'loguru==0.3.2',
         'flask',
-        'psutil'
+        'psutil',
         'requests',
-        'pathlib'
+        'pathlib',
+        'pytest'
     ]
 )

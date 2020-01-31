@@ -9,6 +9,16 @@
                  CUSTOM STYLES
 ============================================= */
 
+.shutdown-btn {
+    border-width: 0px;
+    width: 100%;
+    background-color: rgba(0,0,0,0);
+    padding-left: 9px;
+}
+
+.shutdown-btn:hover {
+    background-color: rgba(164, 157, 157, 0.122);
+}
 
 /* =============================================
             PURE TEMPLATE STYLES
