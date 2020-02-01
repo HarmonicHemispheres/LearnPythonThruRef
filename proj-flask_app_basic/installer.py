@@ -18,16 +18,18 @@ except:
         exit("---- Goodbye! ----")
     else:
         subprocess.run(["pip", "install", "prompt_toolkit"])  # doesn't capture output
+        from prompt_toolkit import prompt
+        from prompt_toolkit.completion import WordCompleter
 
 ########################################
 ### Setup some variables
 ########################################
 yes_no_completer = WordCompleter(['y', 'n'])
+setup_opt_completer = WordCompleter(['install', 'uninstall'])
 
 ########################################
 ### Choose Action path
 ########################################
-setup_opt_completer = WordCompleter(['install', 'uninstall'])
 text = prompt('>>>> How can we help you? (tab): ', completer=setup_opt_completer)
 
 
