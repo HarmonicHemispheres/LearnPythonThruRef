@@ -25,7 +25,7 @@ except:
 ### Setup some variables
 ########################################
 yes_no_completer = WordCompleter(['y', 'n'])
-setup_opt_completer = WordCompleter(['install', 'uninstall'])
+setup_opt_completer = WordCompleter(['install', 'uninstall', "exit"])
 
 ########################################
 ### Choose Action path
@@ -36,7 +36,14 @@ text = prompt('>>>> How can we help you? (tab): ', completer=setup_opt_completer
 ########################################
 ### PATH: Install
 ########################################
-if text == "install":
+if text == "exit":
+    exit("---------- goodbye ----------")
+
+
+########################################
+### PATH: Install
+########################################
+elif text == "install":
 
     ### install the basic app package ###
     file_manager = FileManager()
