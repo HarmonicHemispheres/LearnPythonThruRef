@@ -23,7 +23,7 @@ setup(
     setup_requires=["pytest-runner"],
     tests_require=["pytest"],
     install_requires=[
-        'loguru==0.3.2',
+        'loguru==0.5.3',
         'flask',
         'psutil',
         'requests',
